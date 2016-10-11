@@ -1,5 +1,3 @@
-/* general tree css */
-
 treecontrol {
     /* prevent user selection */
     -moz-user-select: -moz-none;
@@ -29,12 +27,12 @@ treecontrol li {
     line-height: 20px;
 }
 
-treecontrol li.tree-expanded i.tree-normal, treecontrol li.tree-collapsed i.tree-normal {display:none;}
-treecontrol li.tree-expanded i.tree-has-children, treecontrol li.tree-collapsed i.tree-has-children {display:inline;}
-treecontrol li.tree-normal i.tree-has-children {display:none;}
-treecontrol li.tree-normal i.tree-normal {display:inline;}
+treecontrol li.tree-expanded i.tree-leaf-head, treecontrol li.tree-collapsed i.tree-leaf-head {display:none;}
+treecontrol li.tree-expanded i.tree-branch-head, treecontrol li.tree-collapsed i.tree-branch-head {display:inline;}
+treecontrol li.tree-leaf i.tree-branch-head {display:none;}
+treecontrol li.tree-leaf i.tree-leaf-head {display:inline;}
 
-treecontrol li i {
+treecontrol li i.tree-branch-head {
     cursor: pointer;
 }
 
@@ -43,21 +41,23 @@ treecontrol li .tree-label {
     display: inline;
 }
 
-/* classic tree css */
-
-treecontrol.tree-classic li.tree-expanded i {
-    padding: 1px 10px;
-    background: url("https://raw.github.com/wix/angular.treecontrol/master/images/folder.png") no-repeat;
+treecontrol li .tree-unselectable {
+    cursor: not-allowed;
 }
 
-treecontrol.tree-classic li.tree-collapsed i {
+treecontrol.tree-classic li.tree-expanded i.tree-branch-head {
     padding: 1px 10px;
-    background: url("https://raw.github.com/wix/angular.treecontrol/master/images/folder-closed.png") no-repeat;
+    background: url("../images/folder.png") no-repeat;
 }
 
-treecontrol.tree-classic li.tree-normal i {
+treecontrol.tree-classic li.tree-collapsed i.tree-branch-head {
     padding: 1px 10px;
-    background: url("https://raw.github.com/wix/angular.treecontrol/master/images/file.png") no-repeat;
+    background: url("../images/folder-closed.png") no-repeat;
+}
+
+treecontrol.tree-classic li.tree-leaf i.tree-leaf-head {
+    padding: 1px 10px;
+    background: url("../images/file.png") no-repeat;
 }
 
 treecontrol.tree-classic li .tree-selected {
@@ -65,19 +65,21 @@ treecontrol.tree-classic li .tree-selected {
     font-weight: bold;
 }
 
-/* light tree css */
-
-treecontrol.tree-light li.tree-expanded i {
-    padding: 1px 10px;
-    background: url("https://raw.github.com/wix/angular.treecontrol/master/images/node-opened-2.png") no-repeat;
+treecontrol.tree-classic li .tree-unselectable {
+    color: #ddd;
 }
 
-treecontrol.tree-light li.tree-collapsed i {
+treecontrol.tree-light li.tree-expanded i.tree-branch-head {
     padding: 1px 10px;
-    background: url("https://raw.github.com/wix/angular.treecontrol/master/images/node-closed-2.png") no-repeat;
+    background: url("../images/node-opened-2.png") no-repeat;
 }
 
-treecontrol.tree-light li.tree-normal i {
+treecontrol.tree-light li.tree-collapsed i.tree-branch-head {
+    padding: 1px 10px;
+    background: url("../images/node-closed-2.png") no-repeat;
+}
+
+treecontrol.tree-light li.tree-leaf i.tree-leaf-head {
     padding: 1px 10px;
     width: 16px; height: 16px;
     background: none no-repeat;
@@ -87,19 +89,21 @@ treecontrol.tree-light li .tree-selected {
     font-weight: bold;
 }
 
-/* dark tree css */
-
-treecontrol.tree-dark li.tree-expanded i {
-    padding: 1px 10px;
-    background: url("https://raw.github.com/wix/angular.treecontrol/master/images/node-opened-light.png") no-repeat;
+treecontrol.tree-light li .tree-unselectable {
+    color: #ddd;
 }
 
-treecontrol.tree-dark li.tree-collapsed i {
+treecontrol.tree-dark li.tree-expanded i.tree-branch-head {
     padding: 1px 10px;
-    background: url("https://raw.github.com/wix/angular.treecontrol/master/images/node-closed-light.png") no-repeat;
+    background: url("../images/node-opened-light.png") no-repeat;
 }
 
-treecontrol.tree-dark li.tree-normal i {
+treecontrol.tree-dark li.tree-collapsed i.tree-branch-head {
+    padding: 1px 10px;
+    background: url("../images/node-closed-light.png") no-repeat;
+}
+
+treecontrol.tree-dark li.tree-leaf i.tree-leaf-head {
     padding: 1px 10px;
     width: 16px; height: 16px;
     background: none no-repeat;
@@ -109,11 +113,58 @@ treecontrol.tree-dark li .tree-selected {
     font-weight: bold;
 }
 
+treecontrol.tree-dark li .tree-unselectable {
+    color: #777;
+}
+
 treecontrol.tree-dark {
     color: #ddd;
 }
 
-/* general styles for the demo */
-h2, h3 {font-family: Georgia; font-style: italic}
-.tree-border {flex: 1;border: 1px solid #47a; box-shadow: 2px 2px 2px 2px #257; margin: 0 5px; overflow: scroll}
-.fake-link {color: blue; text-decoration: underline; cursor: pointer;}
+treecontrol.tree-boot {
+    color: #428bca;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+treecontrol.tree-boot > ul > li {
+    padding: 0;
+}
+
+treecontrol.tree-boot li > .tree-label {
+    display: block;
+    padding: 3px 0;
+    border-radius: 4px;
+}
+
+treecontrol.tree-boot i.tree-branch-head,
+treecontrol.tree-boot i.tree-leaf-head {
+    float: left;
+    height: 16px;
+    margin: 5px;
+}
+
+treecontrol.tree-boot li.tree-expanded i.tree-branch-head {
+    padding: 1px 10px;
+    background: url("../images/folder.png") no-repeat;
+}
+
+treecontrol.tree-boot li.tree-collapsed i.tree-branch-head {
+    padding: 1px 10px;
+    background: url("../images/folder-closed.png") no-repeat;
+}
+
+treecontrol.tree-boot li.tree-leaf i.tree-leaf-head {
+    padding: 1px 10px;
+    background: url("../images/file.png") no-repeat;
+}
+
+treecontrol.tree-boot .tree-label.tree-selected,
+treecontrol.tree-boot .tree-label.tree-selected:hover {
+    color: #fff;
+    background-color: #428bca;
+}
+
+treecontrol.tree-boot .tree-label:hover {
+    background-color: #eee;
+}
