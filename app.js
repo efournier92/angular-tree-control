@@ -1,5 +1,5 @@
 // App
-var treeSample = angular.module('treeSample', ['treeControl']);
+var treeSample = angular.module('treeSample', ['ngRoute', 'ngResource', 'treeControl']);
 
 // Routes
 treeSample.config(function($routeProvider) {
@@ -14,7 +14,8 @@ treeSample.config(function($routeProvider) {
 });
 
 // Controllers
-treeSample.controller('homeController', ['$scope', function($scope) {
+treeSample.controller('homeController', ['$scope', '$resource', '$routeParams', function($scope, $resource, $routeParams) {
+	
 	$scope.treeOptions = {
     nodeChildren: "children",
     dirSelectable: true,
@@ -29,6 +30,7 @@ treeSample.controller('homeController', ['$scope', function($scope) {
         labelSelected: "a8"
     }
 }
+
 $scope.dataForTheTree =
 [
     { "name" : "Joe", "age" : "21", "children" : [
@@ -43,4 +45,5 @@ $scope.dataForTheTree =
     { "name" : "Albert", "age" : "33", "children" : [] },
     { "name" : "Ron", "age" : "29", "children" : [] }
 ];
+
 }]);
